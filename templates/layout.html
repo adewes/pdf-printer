@@ -1,0 +1,108 @@
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+
+        .invoice-header {
+            display: flex;
+            display: -webkit-flex;
+            flex-flow: row wrap;
+            margin-bottom: 100px;
+            flex: 2 0px;
+            -webkit-justify-content: space-between;
+        }
+
+        .invoice-header > .billing-address{
+            order: 1;
+        }
+
+        .invoice-header > .invoice-details{
+            order: 2;
+        }
+
+        .items {
+            display:block;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight:200;
+        }
+
+        @media print {
+                footer {
+                    position: fixed;
+                    width:100%;
+                    bottom: 40px;
+                    left:0;
+                }
+
+                footer p {
+                    width:100%;
+                    text-align:center !important;
+                    color:#aaa;
+                }
+
+                body {
+                    padding:100px;
+                    padding-top:150px;
+                }
+            }
+        .centered {
+            text-align: center;
+        }
+
+        .underlined {
+            text-decoration: underline;
+        }
+
+        .datatable {
+            width: 100%;
+            border-collapse: all;
+            border:1px solid #aaa;
+        }
+
+        .datatable td.separator {
+            border-top:1px dotted #aaa;
+        }
+
+        table th {
+            text-align:right;
+            padding:10px;
+        }
+
+        header{
+            position:fixed;
+            top:20px;
+            left:0;
+            width:100%;
+            padding-left:100px;
+            padding-right:100px;
+            margin-bottom:10px;
+            border-bottom:1px solid #aaa;
+        }
+
+        table td {
+            margin:0;
+            margin-top: 10px;
+            padding:10px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <p>
+        put logo/image here
+    </p>
+</header>
+{% block body %}{% endblock %}
+<footer>
+    <p>
+        Company Name • Street • ZIP City
+    </p>
+</footer>
+</body>
+</html>
