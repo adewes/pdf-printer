@@ -32,4 +32,9 @@ def generate_pdf(template, filename, media_path=None, template_context=None):
     web.print_(printer)
 
 if __name__ == '__main__':
-    generate_pdf('example','test.pdf',os.path.abspath('media'),template_context={})
+    context = {
+        'user' : {
+            'name' : 'Andreas'
+        }
+    }
+    generate_pdf('example','test.pdf',os.path.abspath('media'),template_context=context)
