@@ -19,3 +19,8 @@ The code needs an X server to run in the background. To run it from a headless s
 use e.g. xvfb-run:
 
     xvfb-run python printer.py
+
+## License
+
+The code in this repository is in the public domain, you can use it without any kind of attribution,
+in any way you please and at your own risk.
