@@ -5,7 +5,14 @@ To run this, you need to install the following requirements:
 * jinja2
 * Qt4 + PyQt4
 
-You can also use Qt5 (see printer_pyqt5), which requires PyQt5 + Pyqt5-webview.
+You can also use Qt5 (see printer_pyqt5), which requires PyQt5 + Pyqt5-webview. On Ubuntu, PyQt
+can be installed easily:
+
+    #pyqt4
+    sudo apt-get install python-pyqt4
+
+    #pyqt5
+    sudo apt-get install python-pyqt5 python-pyqt5.qtwebkit
 
 To generate the demo PDF, simply run
 
