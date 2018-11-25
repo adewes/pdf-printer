@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import QUrl, QTimer
-from PyQt5.QtGui import QPageLayout
+from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QPageLayout, QPageSize 
 from PyQt5.QtPrintSupport import QPrinter
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from jinja2 import Environment, FileSystemLoader
@@ -9,7 +9,9 @@ def generate_pdf(
         template_path,
         template_dir,
         media_dir,
-        template_context):
+        template_context,
+        page_size="A4",
+        page_orientation="Portrait"):
 
     #we use an array to pass the result asynchronously
     ob = []
@@ -27,12 +29,16 @@ def generate_pdf(
     web.setHtml(html,baseUrl=url)
     layout = QPageLayout()
 
+    # you can change the page size / layout here
+    layout.setPageSize(QPageSize(getattr(QPageSize, page_size)))
+    layout.setOrientation(getattr(QPageLayout.Orientation, page_orientation))
+
     def callback(b, ob=ob):
         ob.append(b)
         app.quit()
 
     def printPage():
-        web.page().printToPdf(callback)
+        web.page().printToPdf(callback, layout)
 
     web.loadFinished.connect(printPage)
     app.exec_()
