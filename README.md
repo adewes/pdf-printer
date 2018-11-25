@@ -36,7 +36,13 @@ when installing it through pip. If you don't have a working X setup (e.g. becaus
 
 You can then run the printer using XVFB:
 
-    xvfb-run python printer.py
+    xvfb-run python printer.py [...]
+
+For an example, checkout out the `python-example` target of the Makefile:
+
+    make python-example
+
+This will generate a PDF using the content in the `example` directory.
 
 ## Docker Image
 
@@ -44,11 +50,19 @@ This repository includes a `Dockerfile` that allows you to build a Docker image
 that can run the PDF printer (for better isolation / security). To build the
 image locally, run
 
-    docker build . --tag pdf-printer:latest
+    make docker-image
 
-You can then run the PDF creator using the following command:
+You can then run the PDF creator on the example data using the following command:
 
-    docker run pdf-printer:latest -v media:/media -v templates:/templates -v output:/output
+    make docker-example
+
+Have a look at the Makefile to see how to process different files. Basically,
+the container expects templates to be mounted under `/templates`, media under
+`/media`, the context given as a JSON file located at `/context.json` and
+a writeable output directory mounted at `/output`. It will look for an
+`index.html` file in the template directory and write its output to `/output/index.pdf`.
+The UID/GID of the output file will be set to the values specified using the
+`TARGET_UID` environment variable.
 
 ## License
 
