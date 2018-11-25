@@ -1,6 +1,7 @@
 UID = $$(id -u)
 FLAGS = QTWEBENGINE_CHROMIUM_FLAGS="--disable-logging --no-sandbox --disable-gpu --single-process"
-
+PYCMD = python printer.py example/media example/templates index.html \
+				example/context.json example/output/index.pdf
 docker-image:
 	docker build . --tag pdf-printer:latest
 
@@ -13,6 +14,9 @@ docker-example:
                pdf-printer:latest
 
 python-example:
-	@$(FLAGS) python printer.py example/media example/templates index.html \
-				example/context.json example/output/index.pdf
+	@$(FLAGS) $(PYCMD)
+	@echo "Output saved to example/output/index.pdf"
+
+python-example-xvfb:
+	@$(FLAGS) xvfb-run $(PYCMD)
 	@echo "Output saved to example/output/index.pdf"
