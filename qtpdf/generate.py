@@ -20,7 +20,6 @@ def generate_pdf(
     jinja_env = Environment(loader=FileSystemLoader(template_dir))
 
     template_context['media_dir'] = media_dir
-    #put your templates in the pdf subdirectory
     template = jinja_env.get_template(template_path)
     html = template.render(**template_context)
     app = QApplication.instance()
@@ -29,7 +28,6 @@ def generate_pdf(
     web = QWebEngineView()
     url = QUrl.fromLocalFile(media_dir)
     web.setHtml(html,baseUrl=url)
-    #we need this call to correctly render images...
     layout = QPageLayout()
 
     def callback(b, ob=ob):
