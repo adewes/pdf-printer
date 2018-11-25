@@ -2,30 +2,53 @@
 
 To run this, you need to install the following requirements:
 
+* Python 3
 * jinja2
-* Qt4 + PyQt4
+* Qt5 + PyQt5
 
-You can also use Qt5 (see printer_pyqt5), which requires PyQt5 + Pyqt5-webview. On Ubuntu, PyQt
-can be installed easily:
+To install the dependencies you can (often) simply use pip:
 
-    #pyqt4
-    sudo apt-get install python-pyqt4
-
-    #pyqt5
-    sudo apt-get install python-pyqt5 python-pyqt5.qtwebkit
+    pip3 install -r requirements.txt
 
 To generate the demo PDF, simply run
 
     python printer.py
-    #or
-    python printer_pyqt5.py
 
-## Running this without an X server
+This should generate three PDFs named `test-0.pdf`, `test-1.pdf` and `test-2.pdf`, showing that
+the printer and event loop works when processing multiple documents.
 
-The code needs an X server to run in the background. To run it from a headless server, you can
-use e.g. xvfb-run:
+## System Requirements
+
+PyQt5 requires several X window libraries that are not automatically installed
+when installing it through pip. If you don't have a working X setup (e.g. because you run this on a server) you can install the requirements along with xvfb using
+
+    sudo apt-get install \
+        libxcomposite1 \
+        libxcursor1 \
+        libxi6 \
+        libfontconfig \
+        libxrandr2 \
+        libasound2 \
+        libegl1 \
+        xvfb \
+        libnss3 \
+        libxtst6
+
+You can then run the printer using XVFB:
 
     xvfb-run python printer.py
+
+## Docker Image
+
+This repository includes a `Dockerfile` that allows you to build a Docker image
+that can run the PDF printer (for better isolation / security). To build the
+image locally, run
+
+    docker build . --tag pdf-printer:latest
+
+You can then run the PDF creator using the following command:
+
+    docker run pdf-printer:latest -v media:/media -v templates:/templates -v output:/output
 
 ## License
 
