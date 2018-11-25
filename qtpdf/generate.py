@@ -5,14 +5,11 @@ from PyQt5.QtPrintSupport import QPrinter
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from jinja2 import Environment, FileSystemLoader
 
-app = None
-
 def generate_pdf(
         template_path,
         template_dir,
         media_dir,
         template_context):
-    global app
 
     #we use an array to pass the result asynchronously
     ob = []
